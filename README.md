@@ -157,37 +157,3 @@ Include unit tests, Docker build, and deploy steps for integration.
 Deploy the app using Minikube on your local machine.
 minikube start
 kubectl apply -f k8s/
-
-Directory Structure
-weather-prediction-app/
-│
-├── backend/                    # Backend API (Flask/FastAPI)
-│   ├── app.py                  # Main API file
-│   ├── requirements.txt        # Backend dependencies
-│   └── Dockerfile              # Dockerfile for backend service
-│
-├── frontend/                   # Frontend (React or HTML/JS)
-│   ├── src/                    # Source files for frontend
-│   ├── package.json            # Frontend dependencies
-│   └── Dockerfile              # Dockerfile for frontend service
-│
-├── mlflow/                     # MLFlow related scripts
-│   ├── train_model.py          # Model training script
-│   ├── mlflow_model.py         # MLFlow model registration script
-│   └── model_registry.py       # Manage model registry stages
-│
-├── database/                   # Database setup and migrations
-│   ├── models.py               # SQLAlchemy models
-│   ├── migrations/             # Database migrations
-│   └── manage.py               # Flask app manager
-│
-├── k8s/                        # Kubernetes configuration files
-│   ├── deployment.yaml        # Deployment configuration for Kubernetes
-│   └── service.yaml           # Service configuration for Kubernetes
-│
-├── .github/                    # GitHub Actions CI/CD configuration
-│   ├── ci.yml                  # CI pipeline file for testing
-│   └── cd.yml                  # CD pipeline file for deployment
-│
-├── README.md                   # Project documentation
-└── requirements.txt            # Main project dependencies
