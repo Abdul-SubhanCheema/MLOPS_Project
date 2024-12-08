@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1733644582643
+current_stage: Production
+description: null
+last_updated_timestamp: 1733645893604
+name: weather_prediction_model
+run_id: null
+run_link: null
+source: D:\Mlops\MLOPS_Project\MLOPS_Project\temperature_model.pkl
+status: READY
+status_message: null
+storage_location: D:\Mlops\MLOPS_Project\MLOPS_Project\temperature_model.pkl
+user_id: null
+version: 1

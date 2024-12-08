@@ -1,0 +1,15 @@
+artifact_uri: file:///d:/Mlops/MLOPS_Project/MLOPS_Project/mlruns/0/3d8585bf33b343ac8832495abff6ecb3/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3d8585bf33b343ac8832495abff6ecb3
+run_name: bouncy-hare-772
+run_uuid: 3d8585bf33b343ac8832495abff6ecb3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733645757186
+status: 1
+tags: []
+user_id: Pavilion

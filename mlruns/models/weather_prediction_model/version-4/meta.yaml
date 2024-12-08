@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1733645839820
+current_stage: None
+description: null
+last_updated_timestamp: 1733645839820
+name: weather_prediction_model
+run_id: ff4feb93db424ff887b5667f482ad714
+run_link: null
+source: file:///d:/Mlops/MLOPS_Project/MLOPS_Project/mlruns/0/ff4feb93db424ff887b5667f482ad714/artifacts/weather_model
+status: READY
+status_message: null
+storage_location: file:///d:/Mlops/MLOPS_Project/MLOPS_Project/mlruns/0/ff4feb93db424ff887b5667f482ad714/artifacts/weather_model
+user_id: null
+version: 4

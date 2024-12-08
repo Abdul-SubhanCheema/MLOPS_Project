@@ -1,0 +1,82 @@
+services:
+  # Webserver for Airflow UI
+  webserver:
+    image: apache/airflow:2.3.0
+    environment:
+      - AIRFLOW_CORE_SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CORE_EXECUTOR=LocalExecutor
+      - AIRFLOW_API_AUTH_BACKENDS=airflow.api.auth.backend.basic_auth
+      - AIRFLOW_CORE_FERNET_KEY=DoICxV4K6D8F_OHz78AtMFB9PwUBoV3IMHAJ1YefQFM= # Replace with your own Fernet key
+      - AIRFLOW_CORE_LOAD_EXAMPLES=False
+      - AIRFLOW_CORE_DAG_CONCURRENCY=16
+      - AIRFLOW_CORE_MAX_ACTIVE_RUNS_PER_DAG=16
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    networks:
+      - airflow-network
+
+  # Postgres database for Airflow metadata
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - airflow-network
+
+  # Redis for Airflow's Celery executor (optional if using CeleryExecutor)
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - airflow-network
+
+  # Scheduler for Airflow
+  scheduler:
+    image: apache/airflow:2.3.0
+    environment:
+      - AIRFLOW_CORE_SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CORE_EXECUTOR=LocalExecutor
+      - AIRFLOW_API_AUTH_BACKENDS=airflow.api.auth.backend.basic_auth
+      - AIRFLOW_CORE_FERNET_KEY=DoICxV4K6D8F_OHz78AtMFB9PwUBoV3IMHAJ1YefQFM= # Replace with your own Fernet key
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    command: [ "airflow", "scheduler" ]
+    networks:
+      - airflow-network
+
+  # Flower for monitoring Celery workers (optional if using CeleryExecutor)
+  flower:
+    image: apache/airflow:2.3.0
+    environment:
+      - AIRFLOW_CORE_SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CORE_EXECUTOR=LocalExecutor
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    networks:
+      - airflow-network
+
+networks:
+  airflow-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
